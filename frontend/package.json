@@ -12,8 +12,6 @@
     "gen:api": "openapi-typescript ../docs/openapi.json -o src/lib/api-schema.d.ts"
   },
   "dependencies": {
-    "@fontsource/ibm-plex-sans-arabic": "^5.3.0",
-    "@fontsource/vazirmatn": "^5.3.0",
     "@tauri-apps/api": "^2.12.4",
     "pinia": "^4.1.0",
     "vue": "^3.5.44",

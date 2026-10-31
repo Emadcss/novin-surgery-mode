@@ -8,3 +8,10 @@ backend/media/*
 src-tauri/target
 src-tauri/gen
 src-tauri/kiosk.config.json
+
+.playwright
+.env
+*.log
+.DS_Store
+.idea
+.vscode

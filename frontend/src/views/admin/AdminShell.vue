@@ -9,9 +9,9 @@ import { useAuth } from '../../stores/auth'
 
 const NAV = [
   ['dashboard', 'grid', 'داشبورد'], ['appointments', 'cal', 'نوبت‌ها'], ['doctors', 'doc', 'پزشکان'],
-  ['patients', 'users', 'بیماران'], ['reports', 'chart', 'گزارش‌ها'], ['admins', 'lock', 'ادمین‌ها'],
+  ['patients', 'users', 'بیماران'], ['reports', 'chart', 'گزارش‌ها'], ['admins', 'lock', 'ادمین‌ها'], ['settings', 'cog', 'تنظیمات'],
 ] as const
-const TITLES: Record<string, string> = { dashboard: 'داشبورد', appointments: 'مدیریت نوبت', doctors: 'مدیریت پزشکان', patients: 'مدیریت بیماران', reports: 'گزارش‌گیری', admins: 'مدیریت ادمین‌ها' }
+const TITLES: Record<string, string> = { dashboard: 'داشبورد', appointments: 'مدیریت نوبت', doctors: 'مدیریت پزشکان', patients: 'مدیریت بیماران', reports: 'گزارش‌گیری', admins: 'مدیریت ادمین‌ها', settings: 'تنظیمات' }
 const route = useRoute(); const router = useRouter(); const auth = useAuth()
 const name = computed(() => String(route.name ?? 'dashboard'))
 function exit() { auth.logout(); void router.replace('/') }

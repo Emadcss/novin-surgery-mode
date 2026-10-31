@@ -36,3 +36,6 @@ export interface Report {
   per_day: DayCount[]; by_category: KeyCount[]; by_procedure: KeyCount[]; by_doctor: KeyCount[]
 }
 export interface AdminUser { id: number; name: string }
+
+export type Theme = 'light' | 'dark' | 'auto'
+export interface Settings { theme: Theme }

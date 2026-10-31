@@ -116,3 +116,12 @@ def test_admins(client, auth):
     assert client.delete(f"/api/admin/admins/{me['id']}", headers=auth).status_code == 400
     assert client.patch(f"/api/admin/admins/{new.json()['id']}", headers=auth, json={"pin": "1234"}).status_code == 409
     assert client.delete(f"/api/admin/admins/{new.json()['id']}", headers=auth).status_code == 204
+
+
+def test_theme_setting_defaults_to_light_and_is_admin_controlled(client, auth):
+    assert client.get("/api/kiosk/settings").json() == {"theme": "light"}
+    assert client.patch("/api/admin/settings", json={"theme": "dark"}).status_code == 401
+    r = client.patch("/api/admin/settings", json={"theme": "dark"}, headers=auth)
+    assert r.json() == {"theme": "dark"}
+    assert client.get("/api/kiosk/settings").json() == {"theme": "dark"}
+    assert client.patch("/api/admin/settings", json={"theme": "neon"}, headers=auth).status_code == 422

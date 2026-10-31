@@ -15,6 +15,7 @@ export const router = createRouter({
         { path: 'patients', name: 'patients', component: () => import('./views/admin/PatientsView.vue') },
         { path: 'reports', name: 'reports', component: () => import('./views/admin/ReportsView.vue') },
         { path: 'admins', name: 'admins', component: () => import('./views/admin/AdminsView.vue') },
+        { path: 'settings', name: 'settings', component: () => import('./views/admin/SettingsView.vue') },
       ],
     },
     { path: '/:pathMatch(.*)*', redirect: '/' },

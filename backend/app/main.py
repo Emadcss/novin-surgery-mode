@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from .config import settings
-from .routers import admins, appointments, auth, doctors, kiosk, patients, stats
+from .routers import admins, appointments, auth, doctors, kiosk, patients, app_settings, stats
 
 
 @asynccontextmanager
@@ -26,7 +26,7 @@ app.add_middleware(
 )
 
 api = APIRouter(prefix="/api")
-for r in (kiosk.router, auth.router, doctors.router, appointments.router, patients.router, stats.router, admins.router):
+for r in (kiosk.router, auth.router, doctors.router, appointments.router, patients.router, stats.router, admins.router, app_settings.kiosk_router, app_settings.admin_router):
     api.include_router(r)
 
 

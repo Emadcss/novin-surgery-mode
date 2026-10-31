@@ -84,3 +84,12 @@ class Appointment(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), index=True)
 
     doctor: Mapped[Doctor | None] = relationship(back_populates="appointments")
+
+
+class Setting(Base):
+    """تنظیمات کلید/مقدار کیوسک (مثلاً theme). مقدار پیش‌فرض در کد است، نه در دیتابیس."""
+
+    __tablename__ = "settings"
+
+    key: Mapped[str] = mapped_column(String(50), primary_key=True)
+    value: Mapped[str] = mapped_column(String(200))

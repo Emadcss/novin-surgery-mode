@@ -71,7 +71,7 @@ export const useKiosk = defineStore('kiosk', () => {
       case 'doctor': return doctor.value?.name ?? ''
       case 'first': return first.value
       case 'last': return last.value
-      case 'mobile': return mobile.value ? fa(fmtMobile(mobile.value)) : ''
+      case 'mobile': return mobile.value ? '\u2066' + fa(fmtMobile(mobile.value)) + '\u2069' : ''
       case 'history': return history.value === null ? '' : history.value ? 'دارد' : 'ندارد'
     }
   }

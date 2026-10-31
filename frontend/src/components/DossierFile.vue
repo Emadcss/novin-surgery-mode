@@ -17,6 +17,12 @@ const active = (l: (typeof LINES)[number]) =>
   (l.step === kiosk.step || (l.f === 'proc' && kiosk.step === 'cat')) &&
   (l.step !== 'name' || l.f === kiosk.activeName)
 
+const nameLive = (l: (typeof LINES)[number]) => kiosk.screen === 'flow' && kiosk.step === 'name' && l.step === 'name' && layout.value !== 'mobile'
+function tap(l: (typeof LINES)[number]) {
+  if (nameLive(l)) kiosk.activeName = l.f === 'last' ? 'last' : 'first'
+  else kiosk.edit(l.step, l.f)
+}
+
 // در حالت موبایل چیپ فعال را وسط نوار می‌آورد
 watch(() => [kiosk.step, kiosk.activeName], async () => {
   if (layout.value !== 'mobile' || !list.value || kiosk.step === 'review') return
@@ -40,8 +46,8 @@ watch(() => [kiosk.step, kiosk.activeName], async () => {
         <ul ref="list" class="lines">
           <li v-for="(l, i) in LINES" :key="l.f">
             <div v-if="demo" class="line"><span class="lbl">{{ l.lbl }}</span><span class="val" :style="{ '--w': widths[i] + '%' }" /></div>
-            <button v-else type="button" class="line" :class="{ done: kiosk.fieldDone(l.f), active: active(l), edit: kiosk.canEdit(l) }"
-                    :disabled="!kiosk.canEdit(l)" :tabindex="kiosk.canEdit(l) ? 0 : -1" @click="kiosk.edit(l.step, l.f)">
+            <button v-else type="button" class="line" :data-step="l.step" :class="{ done: kiosk.fieldDone(l.f), active: active(l), edit: kiosk.canEdit(l) }"
+                    :disabled="!nameLive(l) && !kiosk.canEdit(l)" :tabindex="nameLive(l) || kiosk.canEdit(l) ? 0 : -1" @click="tap(l)">
               <span class="lbl">{{ l.lbl }}</span>
               <span :key="kiosk.fieldText(l.f)" class="val">{{ kiosk.fieldText(l.f) }}</span>
             </button>

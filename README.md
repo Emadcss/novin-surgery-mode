@@ -19,6 +19,7 @@ export DATABASE_URL=postgresql+psycopg://novin:novin@localhost:5432/novin_kiosk
 .venv/bin/uvicorn app.main:app --reload
 cd ../frontend && npm i && npm run dev     # http://localhost:5173
 ```
+- حالت تیره به‌صورت پیش‌فرض غیرفعال است؛ ادمین از «تنظیمات» پنل مدیریت می‌تواند آن را فعال کند (ذخیره در دیتابیس، اعمال روی همه‌ی کیوسک‌ها).
 - ورود به پنل مدیریت: ۵ لمس پشت‌سرهم روی لوگوی بالای کیوسک (یا آدرس `/#/admin/login`).
 - دکمه‌ی «نمای طراحی» (فقط در حالت dev) برای مشاهده‌ی سه چیدمان.
 

@@ -1,6 +1,6 @@
 import { config } from './config'
 import type {
-  AdminUser, Appointment, AppointmentIn, Dashboard, DayCount, Doctor, DoctorIn, KioskDoctor, Page, Patient, Procedure, Report, Status,
+  AdminUser, Appointment, Settings, Theme, AppointmentIn, Dashboard, DayCount, Doctor, DoctorIn, KioskDoctor, Page, Patient, Procedure, Report, Status,
 } from './types'
 
 export class ApiError extends Error {
@@ -44,6 +44,7 @@ export const api = {
   // ---- کیوسک ----
   kioskDoctors: (procedure: Procedure) => request<KioskDoctor[]>('GET', '/kiosk/doctors', { query: { procedure }, kiosk: true }),
   kioskBook: (body: AppointmentIn) => request<Appointment>('POST', '/kiosk/appointments', { body, kiosk: true }),
+  kioskSettings: () => request<Settings>('GET', '/kiosk/settings', { kiosk: true }),
   // ---- ورود ----
   login: (pin: string) => request<{ access_token: string; admin: AdminUser }>('POST', '/auth/login', { body: { pin } }),
   me: () => request<AdminUser>('GET', '/admin/me'),
@@ -68,6 +69,8 @@ export const api = {
   dashboard: () => request<Dashboard>('GET', '/admin/stats/dashboard'),
   calendar: (date_from: string, date_to: string) => request<DayCount[]>('GET', '/admin/stats/calendar', { query: { date_from, date_to } }),
   report: (days: number) => request<Report>('GET', '/admin/stats/report', { query: { days } }),
+  settings: () => request<Settings>('GET', '/admin/settings'),
+  setTheme: (theme: Theme) => request<Settings>('PATCH', '/admin/settings', { body: { theme } }),
   // ---- ادمین‌ها ----
   admins: () => request<AdminUser[]>('GET', '/admin/admins'),
   createAdmin: (body: { name: string; pin: string }) => request<AdminUser>('POST', '/admin/admins', { body }),

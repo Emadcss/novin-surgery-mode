@@ -11,12 +11,7 @@
   --font:'Vazirmatn','Segoe UI',Tahoma,sans-serif; --mono:'IBM Plex Sans Arabic','Vazirmatn',Tahoma,sans-serif;
   --fs-h1:2.25rem; --fs-lg:1.5rem; --fs-md:1.125rem; --fs-sm:.9375rem; --tap:4.5rem; --pad:1.5rem; --gap:1rem; --r:1.125rem;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0B1418; --surface:#13222A; --paper:#172932; --folder:#27434B; --folder-edge:#365862;
-  --ink:#E7F1F3; --ink-2:#92ACB3; --line:#2A434C; --line-2:#20363E;
-  --accent:#3FC2CE; --accent-2:#2BA3AF; --accent-ink:#04262B; --accent-soft:#17383F;
-  --good:#52C98C; --warn:#F0B35A; --warn-soft:#3A2D14; --bad:#FF8A80; --bad-soft:#3E1D1B;
-  --key:#1B3039; --key-edge:#0A1317; --key-fn:#264049; --shadow:0 .5rem 1.5rem rgba(0,0,0,.45); color-scheme:dark}}
+/* حالت تیره فقط وقتی ادمین از پنل مدیریت فعال کند (data-theme) اعمال می‌شود؛ پیش‌فرض: روشن */
 :root[data-theme="dark"]{
   --bg:#0B1418; --surface:#13222A; --paper:#172932; --folder:#27434B; --folder-edge:#365862;
   --ink:#E7F1F3; --ink-2:#92ACB3; --line:#2A434C; --line-2:#20363E;
@@ -428,3 +423,13 @@ svg.i{width:1.5em;height:1.5em;fill:none;stroke:currentColor;stroke-width:1.8;st
   .panel{box-shadow:none;padding:0}.panel>*:not(.done-wrap),.done-wrap>*:not(.slot){display:none!important}
   .slot{width:72mm}.slot::before{display:none}.slip{animation:none;transform:none;box-shadow:none}
 }
+
+/* ---- مرحله‌ی نام در حالت عمودی: بدون سرتیتر؛ تایپ مستقیم روی پرونده، کیبورد درشت و تمام‌عرض ---- */
+.shell[data-layout="portrait"][data-step="name"] .p-head{display:none}
+.shell[data-layout="portrait"][data-step="name"] .entry{gap:0}
+.shell[data-layout="portrait"][data-step="name"] .kb{flex:1;margin-top:0;min-height:0;grid-auto-rows:minmax(0,1fr);gap:.75rem}
+.shell[data-layout="portrait"][data-step="name"] .kb .key{height:auto;min-height:0;font-size:2.5rem;border-radius:1rem}
+.shell[data-layout="portrait"][data-step="name"] .kb .key.fn{font-size:1.25rem}
+.shell[data-layout="portrait"][data-step="name"] .line.active .val::after{content:"";display:inline-block;width:.1875rem;height:1.2em;background:var(--accent);margin-inline-start:.125rem;vertical-align:middle;animation:blink 1s steps(1) infinite}
+.shell[data-layout="portrait"][data-step="name"] .line[data-step="name"]{cursor:pointer}
+.theme-note{color:var(--ink-2);font-size:var(--fs-sm);line-height:1.9}

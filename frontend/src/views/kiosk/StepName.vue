@@ -29,7 +29,7 @@ function key(code: string) {
              @input="k.last = cleanNameInput(($event.target as HTMLInputElement).value)" @focus="k.activeName = 'last'" /></label>
   </div>
   <div v-else class="entry">
-    <div class="fields">
+    <div v-if="layout !== 'portrait'" class="fields">
       <button type="button" class="field" :class="{ cur: k.activeName === 'first', ok: nameOk(k.first) }" @click="k.activeName = 'first'"><span class="lbl">نام</span><span class="txt">{{ k.first }}</span></button>
       <button type="button" class="field" :class="{ cur: k.activeName === 'last', ok: nameOk(k.last) }" @click="k.activeName = 'last'"><span class="lbl">نام خانوادگی</span><span class="txt">{{ k.last }}</span></button>
     </div>

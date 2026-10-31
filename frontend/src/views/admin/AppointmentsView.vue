@@ -40,7 +40,7 @@ const opts = {
 </script>
 <template>
   <div class="box"><div class="filters">
-    <input v-model="f.q" class="inp" placeholder="جستجوی نام، موبایل یا کد پذیرش" autocomplete="off" />
+    <input v-model="f.q" class="inp" aria-label="جستجوی نوبت" placeholder="جستجوی نام، موبایل یا کد پذیرش" autocomplete="off" />
     <div v-for="(o, k) in opts" :key="k" class="segs"><button v-for="[v, l] in o" :key="v" type="button" class="seg" :class="{ on: f[k] === v }" @click="f[k] = v">{{ l }}</button></div>
     <select v-model="f.doctor_id" class="inp" aria-label="پزشک"><option value="">همه پزشکان</option><option v-for="d in doctors" :key="d.id" :value="String(d.id)">{{ d.name }}</option></select>
   </div></div>

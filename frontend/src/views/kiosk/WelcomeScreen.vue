@@ -7,9 +7,11 @@ const k = useKiosk()
 <template>
   <main class="welcome">
     <div class="w-copy">
-      <p class="eyebrow">پذیرش خودکار جراحی</p>
-      <h1>پرونده جراحی خود را <em>همین‌جا</em> بسازید</h1>
-      <p>در چند مرحله کوتاه، نوع عمل و پزشک را انتخاب کنید، مشخصات‌تان را وارد کنید و کد پذیرش و قبض را همراه ببرید.</p>
+      <div class="w-text">
+        <p class="eyebrow">پذیرش خودکار جراحی</p>
+        <h1>پرونده جراحی خود را <em>همین‌جا</em> بسازید</h1>
+        <p>در چند مرحله کوتاه، نوع عمل و پزشک را انتخاب کنید، مشخصات‌تان را وارد کنید و کد پذیرش و قبض را همراه ببرید.</p>
+      </div>
       <button class="cta" type="button" @click="k.start()">شروع پذیرش <Icon name="next" /></button>
       <ul class="w-points"><li><Icon name="clock" />حدود ۲ دقیقه</li><li><Icon name="shield" />اطلاعات شما محرمانه می‌ماند</li></ul>
     </div>

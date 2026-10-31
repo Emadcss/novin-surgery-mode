@@ -69,7 +69,7 @@ async function remove(d: Doctor) { await api.deleteDoctor(d.id); delId.value = n
     <div v-if="!list.length" class="empty">هنوز پزشکی تعریف نشده است.</div>
   </div>
 
-  <ModalDialog v-if="form">
+  <ModalDialog v-if="form" @close="form = null">
     <div class="form">
       <h2>{{ form.id ? 'ویرایش پزشک' : 'افزودن پزشک' }}</h2>
       <div class="ph-row">

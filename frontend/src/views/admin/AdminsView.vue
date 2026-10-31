@@ -44,7 +44,7 @@ async function remove(a: AdminUser) { try { await api.deleteAdmin(a.id); delId.v
       </div>
     </div>
   </div></div>
-  <ModalDialog v-if="form">
+  <ModalDialog v-if="form" @close="form = null">
     <div class="form">
       <h2>{{ form.id ? 'ویرایش ادمین' : 'افزودن ادمین' }}</h2>
       <label class="fl"><span>نام</span><input v-model="form.name" class="inp" autocomplete="off" /></label>

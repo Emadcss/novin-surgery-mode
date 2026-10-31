@@ -26,7 +26,7 @@ export function receiptRows(ap: Appointment): ReceiptRow[] {
  * چاپگرهای حرارتی معمولاً فونت فارسی ندارند، بنابراین تصویر چاپ می‌شود.
  */
 export async function renderReceiptPng(ap: Appointment): Promise<string> {
-  await Promise.all([document.fonts.load('700 30px Vazirmatn'), document.fonts.load('500 24px Vazirmatn'), document.fonts.load('700 56px "IBM Plex Sans Arabic"')])
+  await Promise.all([document.fonts.load('700 30px Mikhak'), document.fonts.load('500 24px Mikhak'), document.fonts.load('700 56px Mikhak'), document.fonts.load('40px AGhasem')])
   const W = RECEIPT_WIDTH
   const pad = 28
   const rows = receiptRows(ap)
@@ -49,16 +49,16 @@ export async function renderReceiptPng(ap: Appointment): Promise<string> {
     ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(W - pad, y); ctx.stroke(); ctx.restore()
   }
 
-  center('نوین دیدگان', '800 40px Vazirmatn'); y += 40
-  center('قبض پذیرش جراحی', '500 26px Vazirmatn'); y += 28
+  center('نوین دیدگان', '800 40px Mikhak'); y += 40
+  center('قبض پذیرش جراحی', '500 26px Mikhak'); y += 28
   rule(); y += 44
-  center('کد پذیرش', '500 24px Vazirmatn'); y += 62
-  center(fa(fmtCode(ap.code)), '700 56px "IBM Plex Sans Arabic"', 'ltr'); y += 52
+  center('کد پذیرش', '500 24px Mikhak'); y += 62
+  center(fa(fmtCode(ap.code)), '700 56px Mikhak', 'ltr'); y += 52
   rule(); y += 42
   for (const r of rows) {
-    ctx.font = '500 26px Vazirmatn'; ctx.direction = 'rtl'; ctx.textAlign = 'right'
+    ctx.font = '500 26px Mikhak'; ctx.direction = 'rtl'; ctx.textAlign = 'right'
     ctx.fillText(r.label, W - pad, y)
-    ctx.font = '700 28px Vazirmatn'; ctx.textAlign = 'left'
+    ctx.font = '700 28px Mikhak'; ctx.textAlign = 'left'
     ctx.fillText(r.value, pad, y)
     y += 46
   }
@@ -69,7 +69,7 @@ export async function renderReceiptPng(ap: Appointment): Promise<string> {
   const k = (W - pad * 2) / bw
   for (const b of bars) ctx.fillRect(pad + b.x * k, y, Math.max(1, b.w * k), 70)
   y += 70 + 40
-  center('تخصص ‑ پزشک ‑ ماه‌و‌روز ‑ سابقه ‑ شماره نوبت', '500 20px Vazirmatn'); y += 40
-  center('این قبض را به میز پذیرش تحویل دهید.', '600 24px Vazirmatn')
+  center('تخصص ‑ پزشک ‑ ماه‌و‌روز ‑ سابقه ‑ شماره نوبت', '500 20px Mikhak'); y += 40
+  center('این قبض را به میز پذیرش تحویل دهید.', '600 24px Mikhak')
   return c.toDataURL('image/png').split(',')[1]!
 }

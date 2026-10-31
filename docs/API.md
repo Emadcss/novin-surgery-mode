@@ -61,6 +61,20 @@
 - `PATCH /api/admin/admins/{id}` `{name?, pin?}`
 - `DELETE /api/admin/admins/{id}` (`400` برای حذف خود یا تنها ادمین)
 
+## تنظیمات
+- `GET /api/kiosk/settings` → `{theme}` (با `X-Kiosk-Key` اگر تنظیم شده)
+- `GET /api/admin/settings` → `{theme}`؛ `PATCH /api/admin/settings` `{theme?}` → `{theme}`
+- `theme`: `light` (پیش‌فرض) | `dark` | `auto`. حالت تیره فقط با انتخاب ادمین فعال می‌شود؛ `422` برای مقدار نامعتبر.
+
 ## سایر
 - `GET /api/health` → `{status:"ok"}`
 - فایل‌های ثابت: `GET /media/doctors/<file>.jpg`
+
+## منبع حقیقت و بررسی خودکار
+مشخصات ماشین‌خوان در `docs/openapi.json` ذخیره است و از خود FastAPI ساخته می‌شود:
+```bash
+cd backend && .venv/bin/python scripts/export_openapi.py        # بازسازی docs/openapi.json
+cd frontend && npm run gen:api                                  # ساخت src/lib/api-schema.d.ts از روی آن
+```
+- تست `tests/test_contract.py` اگر `docs/openapi.json` با کد هم‌خوان نباشد یا مسیری در این سند نیامده باشد شکست می‌خورد.
+- فرانت با `npm run typecheck` تطابق تایپ‌های دستی (`lib/types.ts`) را با `api-schema.d.ts` می‌سنجد.

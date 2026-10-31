@@ -14,7 +14,7 @@ onMounted(load)
 watch(q, () => { clearTimeout(timer); timer = window.setTimeout(load, 300) })
 </script>
 <template>
-  <div class="box"><div class="filters"><input v-model="q" class="inp" placeholder="جستجوی نام یا شماره موبایل" autocomplete="off" /></div></div>
+  <div class="box"><div class="filters"><input v-model="q" class="inp" aria-label="جستجوی بیمار" placeholder="جستجوی نام یا شماره موبایل" autocomplete="off" /></div></div>
   <div class="box">
     <div v-if="!items.length" class="empty">بیماری پیدا نشد.</div>
     <template v-else>

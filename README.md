@@ -6,7 +6,7 @@ Vue 3 + FastAPI + PostgreSQL + Tauri
 backend/    FastAPI + SQLAlchemy + Alembic (API و پنل مدیریت)
 frontend/   Vue 3 + Vite + Pinia (کیوسک و پنل مدیریت؛ سه چیدمان: افقی، عمودی، موبایل)
 src-tauri/  پوسته‌ی Tauri (تمام‌صفحه، چاپ قبض ESC/POS)
-docs/API.md قرارداد API
+docs/API.md قرارداد API (متن) · docs/openapi.json (ماشین‌خوان، ساخته‌شده از FastAPI)
 ```
 
 ## اجرا برای توسعه
@@ -42,3 +42,6 @@ cd ../frontend && npm i && npm run dev     # http://localhost:5173
 ## نکات
 - کد ملی دریافت نمی‌شود. کد پذیرش ۱۱ رقمی: تخصص(۱) + شماره پزشک(۲) + ماه‌روز شمسی(۴) + سابقه(۱) + نوبت روز(۳).
 - پزشک با حذف نرم پاک می‌شود تا شماره‌ی او دوباره استفاده نشود.
+
+## قرارداد API
+بعد از هر تغییر در endpointها: `cd backend && python scripts/export_openapi.py` سپس `cd frontend && npm run gen:api && npm run typecheck`. تست‌ها و CI اگر `API.md`، `openapi.json` یا تایپ‌های فرانت با کد ناهم‌خوان باشند شکست می‌خورند.

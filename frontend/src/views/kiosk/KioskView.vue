@@ -25,11 +25,11 @@ function yes() { cancelOpen.value = false; k.reset() }
     <FlowScreen v-else-if="k.screen === 'flow'" />
     <StatusScreens v-else-if="k.screen === 'saving' || k.screen === 'fail'" :kind="k.screen" />
     <DoneScreen v-else-if="k.screen === 'done'" />
-    <ModalDialog v-if="cancelOpen">
+    <ModalDialog v-if="cancelOpen" @close="cancelOpen = false">
       <h2>پذیرش لغو شود؟</h2><p>اطلاعات واردشده پاک می‌شود و به صفحه‌ی اول برمی‌گردید.</p>
       <div class="row"><button type="button" class="btn sec" @click="cancelOpen = false">ادامه می‌دهم</button><button type="button" class="btn warn" @click="yes">لغو پذیرش</button></div>
     </ModalDialog>
-    <ModalDialog v-else-if="idle.warn.value">
+    <ModalDialog v-else-if="idle.warn.value" @close="idle.keep()">
       <h2>هنوز اینجا هستید؟</h2><p>برای حفظ حریم خصوصی، پس از <span class="count">{{ idle.left.value }}</span> ثانیه پرونده بسته می‌شود.</p>
       <div class="row"><button type="button" class="btn pri" style="max-width: none" @click="idle.keep()">بله، ادامه می‌دهم</button></div>
     </ModalDialog>

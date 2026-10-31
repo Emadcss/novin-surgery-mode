@@ -587,6 +587,10 @@ export interface components {
         };
         /** SettingsOut */
         SettingsOut: {
+            /** Texts */
+            texts?: {
+                [key: string]: string;
+            };
             /**
              * Theme
              * @enum {string}
@@ -595,6 +599,10 @@ export interface components {
         };
         /** SettingsPatch */
         SettingsPatch: {
+            /** Texts */
+            texts?: {
+                [key: string]: string | null;
+            } | null;
             /** Theme */
             theme?: ("light" | "dark" | "auto") | null;
         };

@@ -71,6 +71,7 @@ export const api = {
   report: (days: number) => request<Report>('GET', '/admin/stats/report', { query: { days } }),
   settings: () => request<Settings>('GET', '/admin/settings'),
   setTheme: (theme: Theme) => request<Settings>('PATCH', '/admin/settings', { body: { theme } }),
+  setTexts: (texts: Record<string, string | null>) => request<Settings>('PATCH', '/admin/settings', { body: { texts } }),
   // ---- ادمین‌ها ----
   admins: () => request<AdminUser[]>('GET', '/admin/admins'),
   createAdmin: (body: { name: string; pin: string }) => request<AdminUser>('POST', '/admin/admins', { body }),

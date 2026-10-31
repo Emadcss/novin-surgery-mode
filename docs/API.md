@@ -62,9 +62,10 @@
 - `DELETE /api/admin/admins/{id}` (`400` برای حذف خود یا تنها ادمین)
 
 ## تنظیمات
-- `GET /api/kiosk/settings` → `{theme}` (با `X-Kiosk-Key` اگر تنظیم شده)
-- `GET /api/admin/settings` → `{theme}`؛ `PATCH /api/admin/settings` `{theme?}` → `{theme}`
+- `GET /api/kiosk/settings` → `{theme, texts}` (با `X-Kiosk-Key` اگر تنظیم شده)
+- `GET /api/admin/settings` → `{theme, texts}`؛ `PATCH /api/admin/settings` `{theme?, texts?}` → `{theme, texts}`
 - `theme`: `light` (پیش‌فرض) | `dark` | `auto`. حالت تیره فقط با انتخاب ادمین فعال می‌شود؛ `422` برای مقدار نامعتبر.
+- `texts`: نگاشت `کلید ← متن` فقط برای متن‌هایی که ادمین تغییر داده است (برای بقیه، پیش‌فرض داخل برنامه‌ی کیوسک). کلید با الگوی `^[a-z0-9_.]{1,40}$` و حداکثر ۳۰۰ نویسه برای هر متن؛ در `PATCH` مقدار خالی یا `null` یعنی بازگشت به پیش‌فرض؛ `422` برای کلید یا طول نامعتبر.
 
 ## سایر
 - `GET /api/health` → `{status:"ok"}`

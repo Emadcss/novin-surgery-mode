@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { api } from '../lib/api'
 import type { Theme } from '../lib/types'
+import { useTexts } from './texts'
 
 const mq = typeof matchMedia === 'function' ? matchMedia('(prefers-color-scheme: dark)') : null
 
@@ -16,7 +17,11 @@ export const useTheme = defineStore('theme', () => {
   mq?.addEventListener('change', () => { if (theme.value === 'auto') apply() })
 
   async function load() {
-    try { theme.value = (await api.kioskSettings()).theme } catch { theme.value = 'light' }
+    try {
+      const st = await api.kioskSettings()
+      theme.value = st.theme
+      useTexts().set(st.texts)
+    } catch { theme.value = 'light' }
     apply()
   }
   async function set(t: Theme) {

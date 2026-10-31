@@ -38,4 +38,4 @@ export interface Report {
 export interface AdminUser { id: number; name: string }
 
 export type Theme = 'light' | 'dark' | 'auto'
-export interface Settings { theme: Theme }
+export interface Settings { theme: Theme; texts: Record<string, string> }

@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { barcodeBars, barcodeWidth } from '../lib/barcode'
 import { fa, fmtCode } from '../lib/fa'
 import { receiptRows } from '../lib/receipt'
+import { receiptFooter } from '../lib/print'
 import type { Appointment } from '../lib/types'
 
 const props = defineProps<{ record: Appointment }>()
@@ -22,8 +23,7 @@ const bw = computed(() => barcodeWidth(bars.value))
         <dl><template v-for="r in rows" :key="r.label"><dt>{{ r.label }}</dt><dd>{{ r.value }}</dd></template></dl>
         <hr />
         <svg class="bc" :viewBox="`0 0 ${bw} 40`" preserveAspectRatio="none" aria-hidden="true"><rect v-for="b in bars" :key="b.x" :x="b.x" y="0" :width="b.w" height="40" /></svg>
-        <div class="legend">تخصص ‑ پزشک ‑ ماه‌و‌روز ‑ سابقه ‑ شماره نوبت</div>
-        <div class="c" style="margin-top: 0.375rem">این قبض را به میز پذیرش تحویل دهید.</div>
+                <div class="c" style="margin-top: 0.375rem">{{ receiptFooter(record) }}</div>
       </div>
     </div>
   </div>

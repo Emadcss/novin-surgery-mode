@@ -9,15 +9,7 @@ import { mobOk, nameOk } from '../lib/validators'
 export type StepId = 'cat' | 'proc' | 'doctor' | 'name' | 'mobile' | 'history' | 'review'
 export type Screen = 'welcome' | 'flow' | 'saving' | 'fail' | 'done'
 
-export const STEPS: { id: StepId; title: string; hint: string }[] = [
-  { id: 'cat', title: 'نوع جراحی را انتخاب کنید', hint: 'یکی از دو گروه را لمس کنید' },
-  { id: 'proc', title: 'کدام نوع؟', hint: 'یکی را لمس کنید' },
-  { id: 'doctor', title: 'پزشک خود را انتخاب کنید', hint: 'پزشکان این بخش نمایش داده می‌شوند' },
-  { id: 'name', title: 'نام و نام خانوادگی', hint: 'با کیبورد فارسی وارد کنید' },
-  { id: 'mobile', title: 'شماره موبایل شما', hint: 'نوبت و یادآوری به این شماره پیامک می‌شود' },
-  { id: 'history', title: 'قبلاً در این مرکز جراحی داشته‌اید؟', hint: 'این پاسخ در پرونده شما ثبت می‌شود' },
-  { id: 'review', title: 'پرونده را بررسی کنید', hint: '' },
-]
+export const STEPS: { id: StepId }[] = ['cat', 'proc', 'doctor', 'name', 'mobile', 'history', 'review'].map((id) => ({ id: id as StepId }))
 const stepIdx = (id: StepId) => STEPS.findIndex((s) => s.id === id)
 
 export interface DossierLine { f: 'proc' | 'doctor' | 'first' | 'last' | 'mobile' | 'history'; step: StepId; lbl: string }

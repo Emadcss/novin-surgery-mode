@@ -3,12 +3,14 @@ import Icon from '../../components/Icon.vue'
 import { CATS } from '../../lib/labels'
 import type { Category } from '../../lib/types'
 import { useKiosk } from '../../stores/kiosk'
+import { useTexts } from '../../stores/texts'
 const k = useKiosk()
+const tx = useTexts()
 </script>
 <template>
   <div class="choice">
     <button v-for="(c, id) in CATS" :key="id" type="button" class="card" :class="{ sel: k.cat === id }" @click="k.pickCat(id as Category)">
-      <span class="ico"><Icon :name="c.icon" /></span><b>{{ c.name }}</b><small>{{ c.sub }}</small>
+      <span class="ico"><Icon :name="c.icon" /></span><b>{{ c.name }}</b><small>{{ tx.t('card.cat.' + id + '.sub') }}</small>
     </button>
   </div>
 </template>

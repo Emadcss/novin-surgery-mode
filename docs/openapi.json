@@ -720,6 +720,13 @@
       },
       "SettingsOut": {
         "properties": {
+          "texts": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Texts",
+            "type": "object"
+          },
           "theme": {
             "enum": [
               "light",
@@ -738,6 +745,27 @@
       },
       "SettingsPatch": {
         "properties": {
+          "texts": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Texts"
+          },
           "theme": {
             "anyOf": [
               {

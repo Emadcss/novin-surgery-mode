@@ -119,9 +119,21 @@ def test_admins(client, auth):
 
 
 def test_theme_setting_defaults_to_light_and_is_admin_controlled(client, auth):
-    assert client.get("/api/kiosk/settings").json() == {"theme": "light"}
+    assert client.get("/api/kiosk/settings").json() == {"theme": "light", "texts": {}}
     assert client.patch("/api/admin/settings", json={"theme": "dark"}).status_code == 401
     r = client.patch("/api/admin/settings", json={"theme": "dark"}, headers=auth)
-    assert r.json() == {"theme": "dark"}
-    assert client.get("/api/kiosk/settings").json() == {"theme": "dark"}
+    assert r.json() == {"theme": "dark", "texts": {}}
+    assert client.get("/api/kiosk/settings").json() == {"theme": "dark", "texts": {}}
     assert client.patch("/api/admin/settings", json={"theme": "neon"}, headers=auth).status_code == 422
+
+
+def test_editable_texts_roundtrip_and_reset(client, auth):
+    r = client.patch("/api/admin/settings", json={"texts": {"step.cat.hint": "  متن تازه  "}}, headers=auth)
+    assert r.json()["texts"] == {"step.cat.hint": "متن تازه"}
+    assert client.get("/api/kiosk/settings").json()["texts"] == {"step.cat.hint": "متن تازه"}
+    assert client.patch("/api/admin/settings", json={"texts": {"step.cat.hint": "ویرایش"}}, headers=auth).json()["texts"]["step.cat.hint"] == "ویرایش"
+    # مقدار خالی ← بازگشت به پیش‌فرض
+    assert client.patch("/api/admin/settings", json={"texts": {"step.cat.hint": ""}}, headers=auth).json()["texts"] == {}
+    assert client.patch("/api/admin/settings", json={"texts": {"Bad Key!": "x"}}, headers=auth).status_code == 422
+    assert client.patch("/api/admin/settings", json={"texts": {"a": "x" * 301}}, headers=auth).status_code == 422
+    assert client.patch("/api/admin/settings", json={"texts": {"a": "x"}}).status_code == 401

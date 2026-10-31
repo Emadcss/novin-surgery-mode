@@ -27,6 +27,7 @@ function key(code: string) {
     <label class="m-field"><span class="lbl">نام خانوادگی</span>
       <input class="m-in" :value="k.last" lang="fa" dir="rtl" enterkeyhint="done" maxlength="24" autocomplete="off" spellcheck="false" placeholder="مثلاً احمدی"
              @input="k.last = cleanNameInput(($event.target as HTMLInputElement).value)" @focus="k.activeName = 'last'" /></label>
+    <button type="button" class="btn pri" :disabled="!k.stepValid" @click="k.next()">ادامه</button>
   </div>
   <div v-else class="entry">
     <div v-if="layout !== 'portrait'" class="fields">

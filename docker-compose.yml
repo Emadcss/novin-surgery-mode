@@ -1,0 +1,39 @@
+# اجرای دیتابیس و API:  docker compose up -d --build
+# سپس فرانت:  cd frontend && npm install && npm run dev
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: novin
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-novin}
+      POSTGRES_DB: novin_kiosk
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U novin -d novin_kiosk"]
+      interval: 5s
+      retries: 10
+    ports:
+      - "5432:5432"
+
+  api:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg://novin:${POSTGRES_PASSWORD:-novin}@db:5432/novin_kiosk
+      SECRET_KEY: ${SECRET_KEY:?SECRET_KEY را در .env تنظیم کنید}
+      KIOSK_KEY: ${KIOSK_KEY:-}
+      SEED_ADMIN_PIN: ${SEED_ADMIN_PIN:-1234}
+      MEDIA_DIR: /srv/media
+    volumes:
+      - media:/srv/media
+    ports:
+      - "8000:8000"
+
+volumes:
+  pgdata:
+  media:
